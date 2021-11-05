@@ -1,0 +1,54 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="d-flex justify-content-center">
+	<div class="col-md-6">
+		<div class="d-flex justify-content-center fs-2">Créer une critique</div>
+			<div  class="border border-dark"> Livre / Article
+				<form action="" method="post">
+					{% csrf_token %}
+<!--					{{form.as_p}}-->
+
+					<div class="d-flex flex-column">
+						<div class="card card-body border-white"> Titre:
+						{{form.headline}}
+						</div>
+						<div class="card card-body border-white">Note :
+							<div class="form-check-inline border-white">
+								{{form.rating}}
+								<input type="radio" value="0"> - 0 </input>
+								<input type="radio" value="1"> - 1 </input>
+								<input type="radio" value="2"> - 2 </input>
+								<input type="radio" value="3"> - 3 </input>
+								<input type="radio" value="4"> - 4 </input>
+								<input type="radio" value="5"> - 5 </input>
+							</div>
+						</div>
+<!--						<div class="form-check form-check-inline">-->
+<!--							<div class="form-check form-check-inline">-->
+<!--								<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio0" value="option0">-->
+<!--								<label class="form-check-label" for="inlineRadio0"> - 0</label>-->
+<!--							</div>-->
+<!--							<div class="form-check form-check-inline">-->
+<!--							  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">-->
+<!--							  <label class="form-check-label" for="inlineRadio1"> - 1</label>-->
+<!--							</div>-->
+<!--						</div>-->
+						<div class="card card-body border-white"> Commentaire:
+							{{form.body}}
+						</div>
+							{{form.errors}}
+					</div>
+					<div class="d-flex justify-content-end">
+						<button type="submit" class="rounded">Envoyer</button>
+					</div>
+				</form>
+			</div>
+		{% for message in messages%}
+		<p id="message">{{message}}</p>
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock %}

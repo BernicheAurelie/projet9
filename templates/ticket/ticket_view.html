@@ -1,0 +1,51 @@
+
+{% block content %}
+{% load static %}
+<div class="d-flex justify-content-center">
+	<div class="d-flex flex-column">
+		{% for ticket in tickets %}
+		<div class="d-flex flex-column bd-highlight mb-3 border border-secondary align-items-start">
+			<div class="p-2 bd-highlight ">
+				Ticket - {{ticket.user}} a demandé une critique
+			</div>
+			<div class="p-2 bd-highlight">
+				{{ticket.title}}
+			</div>
+			<div class="p-2 bd-highlight">
+				{{ticket.description}}
+			</div>
+			<div class="p-2 bd-highlight">
+				<img src="{% get_media_prefix %}{{ticket.image}}" alt="image">
+			</div>
+<!--			<div class="p-2 bd-highlight">-->
+<!--				{{ticket.time_created}}-->
+<!--			</div>-->
+			<div class="p-2 bd-highlight">
+				<a class="btn btn-primary  btn-sm btn-block" href="{% url 'create_review' ticket.id%}">Répondre</a>
+			</div>
+		</div>
+		{% endfor %}
+<!--		<hr>-->
+<!--		<h2>les critiques</h2>-->
+<!--		{% for review in reviews %}-->
+<!--		<div class="d-flex flex-column bd-highlight mb-3 border border-secondary align-items-start">-->
+<!--			<div class="p-2 bd-highlight ">-->
+<!--				{{review.user}} a publié une critique-->
+<!--			</div>-->
+<!--			<div class="p-2 bd-highlight">-->
+<!--				{{review.headline}} - {{review.rating}}-->
+<!--			</div>-->
+<!--			<div class="p-2 bd-highlight">-->
+<!--				{{review.body}}-->
+<!--			</div>-->
+<!--			<div class="p-2 bd-highlight">-->
+<!--				{{review.ticket}}-->
+<!--			</div>-->
+<!--			<div class="p-2 bd-highlight">-->
+<!--				<a class="btn btn-primary  btn-sm btn-block" href="{% url 'create_review' ticket.id%}">Répondre</a>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		{% endfor %}-->
+	</div>
+</div>
+{% endblock %}

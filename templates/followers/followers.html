@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="d-flex justify-content-center">
+	<div class="col-md-6">
+		<div class="d-flex justify-content-center fs-2 p-5">Suivre d'autres utilisateurs
+		</div>
+		<div class="d-flex bd-highlight mb-3">
+  			<div class="p-2 bd-highlight border border-dark">Nom d'utilisateur:</div>
+  			<div class="p-2 ms-auto bd-highlight"></div>
+  			<button type="submit" class="p-2 bd-highlight border border-dark rounded">Envoyer</button>
+		</div>
+<!--		<form action="" method="post" enctype="multipart/form-data">-->
+<!--			 {% csrf_token %}-->
+<!--			{{form.as_p}}-->
+<!--		</form>-->
+		<div class="d-flex justify-content-center p-5">Abonnements
+		</div>
+			<div class="d-flex bd-highlight">
+				<div class="p-2 flex-grow-1 bd-highlight border border-dark">Abonnement 1</div>
+				<button type="submit" class="p-2 bd-highlight border border-dark">Desabonner</button>
+			</div>
+			<div class="d-flex bd-highlight">
+				<div class="p-2 flex-grow-1 bd-highlight border border-dark">Abonnement 2</div>
+				<button type="submit" class="p-2 bd-highlight border border-dark">Desabonner</button>
+			</div>
+		<div class="d-flex justify-content-center p-5">Abonnés
+		</div>
+		<div class="d-flex bd-highlight">
+			<div class="p-2 flex-grow-1 bd-highlight border border-dark">Abonné 1</div>
+		</div>
+		<div class="d-flex bd-highlight">
+			<div class="p-2 flex-grow-1 bd-highlight border border-dark">Abonné 2</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
