@@ -9,27 +9,34 @@
 				<div class="col-9 d-inline-block border border-dark">
     				<input class="form-control text-center" type="text" name="username" placeholder="Nom d'utilisateur">
 				</div>
-				<div class="col-2 d-inline-block">
+				<div class="col-2 d-inline-block ">
 					<button class="p-2 bd-highlight rounded border border-dark">Envoyer</button>
+				</div>
+				<div class="d-flex justify-content-center p-2 text-danger fw-bold">
+					{% for message in messages%}
+					<p id="message">{{message}}</p>
+					{% endfor %}
 				</div>
 			</form>
 
 		<div class="d-flex justify-content-center fs-2 p-5">Abonnements
 		</div>
+		{% for user in following %}
 			<div class="d-flex bd-highlight">
-				{% for user in following %}
 				<div class="p-2 flex-grow-1 bd-highlight border border-dark">{{ user.followed_user.username }}</div>
-				<button type="submit" class="p-2 bd-highlight border border-dark">Desabonner</button>
-				{% endfor %}
+				<button type="submit" class="p-2 bd-highlight border border-dark"><a href="{%url 'delete_followers'%}">Desabonner</a></button>
 			</div>
+			{% endfor %}
 		<div class="d-flex justify-content-center fs-2 p-5">Abonnés
 		</div>
+		{% for user in followed_by %}
 		<div class="d-flex bd-highlight">
-			{% for user in followed_by %}
-			<div class="p-2 flex-grow-1 bd-highlight border border-dark">{{ user.followed_user.username }}</div>
+			<div class="p-2 flex-grow-1 bd-highlight border border-dark">{{ user.user.username }}</div>
 			<button type="submit" class="p-2 bd-highlight border border-dark">Desabonner</button>
-			{% endfor %}
 		</div>
+		{% endfor %}
 	</div>
+	
 </div>
+
 {% endblock %}
