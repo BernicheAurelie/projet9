@@ -1,25 +1,18 @@
 
 {% load static %}
 {% block content %}
-<hr>
-<h2>les critiques</h2>
-{% for review in reviews %}
 <div class="d-flex flex-column bd-highlight mb-3 border border-secondary align-items-start">
     <div class="p-2 bd-highlight ">
-        {{review.user}} a publié une critique
+        {{post.user}} a publié une critique
     </div>
     <div class="p-2 bd-highlight">
-        {{review.headline}} - {{review.rating}}
+        {{post.headline}} - {{post.rating}}
     </div>
     <div class="p-2 bd-highlight">
-        {{review.body}}
+        {{post.body}}
     </div>
     <div class="p-2 bd-highlight">
-        {{review.ticket}}
-    </div>
-    <div class="p-2 bd-highlight">
-        <a class="btn btn-primary  btn-sm btn-block" href="{% url 'create_review' ticket.id%}">Répondre</a>
+        {{post.ticket}}
     </div>
 </div>
-{% endfor %}
 {% endblock %}

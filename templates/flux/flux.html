@@ -12,21 +12,19 @@
     </div>
     <div class="d-flex">
         <div class="card card-body border-white">
-            <a class="btn btn-light border-secondary btn-sm btn-block" href="{%url 'create_review' %}">créer une critique</a>
+            <a class="btn btn-light border-secondary btn-sm btn-block" href="{%url 'create_review_and_ticket' %}">créer une critique</a>
         </div>
     </div>
 </div>
-{%include 'ticket/ticket_view.html'%}
-{%include 'review/review_view.html'%}
 
-
-<!--{% for post in posts %}-->
-<!--  {% if post.content_type == 'TICKET' %}-->
-<!--    {% include 'ticket_view.html' %}-->
-<!--  {% elif post.content_type == 'REVIEW' %}-->
-<!--    {% include 'review_view.html' %}-->
-<!--  {% endif %}-->
-<!--{% endfor %}-->
-
-<!--{% endblock %}-->
+<div class="col-8 offset-2 mt-3">
+{% for post in posts %}
+  {% if post.content_type == 'TICKET' %}
+    {% include 'ticket/ticket_view.html' %}
+  {% elif post.content_type == 'REVIEW' %}
+    {% include 'review/review_view.html' %}
+  {% endif %}
+{% endfor %}
+</div>
+{% endblock %}
 

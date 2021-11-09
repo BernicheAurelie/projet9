@@ -1,11 +1,19 @@
 {% extends 'main.html' %}
 {% load static %}
 {% block content %}
-
+<!--<div class="d-flex justify-content-center">-->
+<!--	<div class="col-md-6"> envoyer la page de ticket-->
+<!--{% for review in reviews %}-->
+<!--  {% if review.ticket_id == None %}-->
+<!--    {% include 'ticket/ticket.html' %}-->
+<!--  {% endif %}-->
+<!--{% endfor %}-->
+<!--	</div>-->
+<!--</div>-->
 <div class="d-flex justify-content-center">
 	<div class="col-md-6">
 		<div class="d-flex justify-content-center fs-2">Créer une critique</div>
-			<div  class="border border-dark"> Livre / Article
+			<div  class="border border-dark"> Critique
 				<form action="" method="post">
 					{% csrf_token %}
 <!--					{{form.as_p}}-->
@@ -15,14 +23,8 @@
 						{{form.headline}}
 						</div>
 						<div class="card card-body border-white">Note :
-							<div class="form-check-inline border-white">
+							<div class="form-check form-check-inline border-white">
 								{{form.rating}}
-								<input type="radio" value="0"> - 0 </input>
-								<input type="radio" value="1"> - 1 </input>
-								<input type="radio" value="2"> - 2 </input>
-								<input type="radio" value="3"> - 3 </input>
-								<input type="radio" value="4"> - 4 </input>
-								<input type="radio" value="5"> - 5 </input>
 							</div>
 						</div>
 <!--						<div class="form-check form-check-inline">-->
@@ -50,5 +52,6 @@
 		{% endfor %}
 	</div>
 </div>
+
 
 {% endblock %}

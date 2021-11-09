@@ -4,32 +4,31 @@
 	<div class="col-md-6">
 		<div class="d-flex justify-content-center fs-2 p-5">Suivre d'autres utilisateurs
 		</div>
-		<div class="d-flex bd-highlight mb-3">
-  			<div class="p-2 bd-highlight border border-dark">Nom d'utilisateur:</div>
-  			<div class="p-2 ms-auto bd-highlight"></div>
-  			<button type="submit" class="p-2 bd-highlight border border-dark rounded">Envoyer</button>
-		</div>
-<!--		<form action="" method="post" enctype="multipart/form-data">-->
-<!--			 {% csrf_token %}-->
-<!--			{{form.as_p}}-->
-<!--		</form>-->
-		<div class="d-flex justify-content-center p-5">Abonnements
+  			<form action="{% url 'add_followers' %}" method="post">
+				{% csrf_token %}
+				<div class="col-9 d-inline-block border border-dark">
+    				<input class="form-control text-center" type="text" name="username" placeholder="Nom d'utilisateur">
+				</div>
+				<div class="col-2 d-inline-block">
+					<button class="p-2 bd-highlight rounded border border-dark">Envoyer</button>
+				</div>
+			</form>
+
+		<div class="d-flex justify-content-center fs-2 p-5">Abonnements
 		</div>
 			<div class="d-flex bd-highlight">
-				<div class="p-2 flex-grow-1 bd-highlight border border-dark">Abonnement 1</div>
+				{% for user in following %}
+				<div class="p-2 flex-grow-1 bd-highlight border border-dark">{{ user.followed_user.username }}</div>
 				<button type="submit" class="p-2 bd-highlight border border-dark">Desabonner</button>
+				{% endfor %}
 			</div>
-			<div class="d-flex bd-highlight">
-				<div class="p-2 flex-grow-1 bd-highlight border border-dark">Abonnement 2</div>
-				<button type="submit" class="p-2 bd-highlight border border-dark">Desabonner</button>
-			</div>
-		<div class="d-flex justify-content-center p-5">Abonnés
+		<div class="d-flex justify-content-center fs-2 p-5">Abonnés
 		</div>
 		<div class="d-flex bd-highlight">
-			<div class="p-2 flex-grow-1 bd-highlight border border-dark">Abonné 1</div>
-		</div>
-		<div class="d-flex bd-highlight">
-			<div class="p-2 flex-grow-1 bd-highlight border border-dark">Abonné 2</div>
+			{% for user in followed_by %}
+			<div class="p-2 flex-grow-1 bd-highlight border border-dark">{{ user.followed_user.username }}</div>
+			<button type="submit" class="p-2 bd-highlight border border-dark">Desabonner</button>
+			{% endfor %}
 		</div>
 	</div>
 </div>
