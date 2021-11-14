@@ -1,5 +1,11 @@
 {% extends 'main.html' %}
 {% block content %}
+<style>
+	a, a:hover {
+		text-decoration:none;
+  		color: black;
+	}
+</style>
 <div class="d-flex justify-content-center">
 	<div class="col-md-6">
 		<div class="d-flex justify-content-center fs-2 p-5">Suivre d'autres utilisateurs
@@ -18,21 +24,27 @@
 					{% endfor %}
 				</div>
 			</form>
-
+			<!-- {% for message in messages%}
+			<div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+			{% endfor %} -->
 		<div class="d-flex justify-content-center fs-2 p-5">Abonnements
 		</div>
 		{% for user in following %}
-			<div class="d-flex bd-highlight">
-				<div class="p-2 flex-grow-1 bd-highlight border border-dark">{{ user.followed_user.username }}</div>
-				<button type="submit" class="p-2 bd-highlight border border-dark"><a href="{%url 'delete_followers'%}">Desabonner</a></button>
-			</div>
+		<div class="d-flex bd-highlight">
+			<div class="p-2 flex-grow-1 bd-highlight border border-dark">{{ user.followed_user.username }}</div>
+			<button type="submit" class="p-2 btn btn-outline-light rounded-0 border border-dark"><a href="{%url 'delete_followers' user.followed_user.id%}">Desabonner</a></button>
+		</div>
+		<!-- <div class="d-flex justify-content-center p-2 text-danger fw-bold">
+			{% for message in message_succes%}
+			<p id="message">{{message}}</p>
 			{% endfor %}
+		</div> -->
+		{% endfor %}
 		<div class="d-flex justify-content-center fs-2 p-5">Abonnés
 		</div>
 		{% for user in followed_by %}
 		<div class="d-flex bd-highlight">
 			<div class="p-2 flex-grow-1 bd-highlight border border-dark">{{ user.user.username }}</div>
-			<button type="submit" class="p-2 bd-highlight border border-dark">Desabonner</button>
 		</div>
 		{% endfor %}
 	</div>

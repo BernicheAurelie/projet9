@@ -1,14 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.forms import formset_factory
 from django.shortcuts import render, redirect
 
 from ticket.forms import CreateTicket
 from ticket.models import Ticket
 from review.forms import CreateReview
-from ticket.views import createTicket
+from review.models import Review
 
-#
+
 @login_required(login_url='connexion')
 def createReview(request, ticket_id=None):
     if request.method == 'POST' and ticket_id is not None:
@@ -27,6 +26,36 @@ def createReview(request, ticket_id=None):
     else:
         form = CreateReview()
     return render(request, 'review/review.html', {'form': form})
+
+@login_required(login_url='connexion')
+def createReviewAndTicket(request):
+    if request.method == 'POST':
+        ticket_form = CreateTicket(request.POST, request.FILES)
+        review_form = CreateReview(request.POST)
+        if ticket_form.is_valid() and review_form.is_valid():
+            ticket = ticket_form.save(commit=False)
+            ticket.user = request.user
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.ticket = ticket
+            review.save()
+            ticket.reviewed = True
+            ticket.save()
+            messages.success(request, 'Votre ticket et votre critique sont postés ')
+            return redirect('flux')
+    else:
+        ticket_form = CreateTicket(request.POST)
+        review_form = CreateReview(request.POST)
+    context = {'ticket_form': ticket_form, 'review_form': review_form}
+    return render(request, 'review/ticket_and_review.html', context)
+
+@login_required(login_url='connexion')
+def delete_review(request, review_id: int):
+    if request.method == 'GET':
+        review = Review.objects.get(id__exact=review_id)
+        review.delete()
+        return redirect('flux')
+    return render(request, 'posts/post_review_view.html')
 
     # elif request.method == 'POST' and ticket_id is None:
     #     form1 = CreateTicket(request.POST)
@@ -59,24 +88,3 @@ def createReview(request, ticket_id=None):
  #            messages.success(request, 'Votre critique: ' + review_headline)
  #            return redirect('flux')
 
-@login_required(login_url='connexion')
-def createReviewAndTicket(request):
-    if request.method == 'POST':
-        ticket_form = CreateTicket(request.POST, request.FILES)
-        review_form = CreateReview(request.POST)
-        if ticket_form.is_valid() and review_form.is_valid():
-            ticket = ticket_form.save(commit=False)
-            ticket.user = request.user
-            review = review_form.save(commit=False)
-            review.user = request.user
-            review.ticket = ticket
-            review.save()
-            ticket.reviewed = True
-            ticket.save()
-            messages.success(request, 'Votre ticket et votre critique sont postés ')
-            return redirect('flux')
-    else:
-        ticket_form = CreateTicket(request.POST)
-        review_form = CreateReview(request.POST)
-    context = {'ticket_form': ticket_form, 'review_form': review_form}
-    return render(request, 'review/ticket_and_review.html', context)

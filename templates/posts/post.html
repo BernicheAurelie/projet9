@@ -1,0 +1,17 @@
+
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+<div class="col-8 offset-2 mt-3">
+{% for post in posts %}
+  {% if post.content_type == 'TICKET' %}
+    {% include 'posts/post_ticket_view.html' %}
+  {% elif post.content_type == 'REVIEW' %}
+    {% include 'posts/post_review_view.html' %}
+  {% endif %}
+{% endfor %}
+</div>
+{% endblock %}
+

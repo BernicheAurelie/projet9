@@ -13,7 +13,7 @@ from django.utils.safestring import mark_safe
 
 class CreateReview(ModelForm):
     class Meta:
-        CHOICES = [(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')]
+        CHOICES = [(0, '- 0'),(1, '- 1'), (2, '- 2'), (3, '- 3'), (4, '- 4'), (5, '- 5')]
         model = Review
         fields = ['rating', 'headline', 'body']
         widgets = {

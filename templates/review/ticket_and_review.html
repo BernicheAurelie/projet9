@@ -1,79 +1,67 @@
 {% extends 'main.html' %}
 {% load static %}
 {% block content %}
+<style>
+	ul#id_rating {
+		display: flex;
+	}
+	ul#id_rating li{
+		display: inline-block;
+		flex: 1;
+	}
+</style>
 
-<form method="post">
+<div class="d-flex justify-content-center">
+	<div class="col-md-7">
+		<div class="d-flex justify-content-center fs-2 p-4">Créer une critique</div>
+		<div  class="border border-dark"> Livre / Article
+			<form action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
 
-	<table>
-		{% csrf_token %}
-        {{ ticket_form }}
-    </table>
-    <table>
-		{% csrf_token %}
-        {{ review_form }}
-    </table>
-	<div class="d-flex justify-content-end">
-		<button type="submit" class="rounded">Envoyer</button>
+				<div class="d-flex flex-column">
+					<div class="card card-body border-white"> Titre:
+					{{ticket_form.title}}
+					</div>
+					<div class="card card-body border-white"> Description:
+					{{ticket_form.description}}
+					</div>
+					<div class="card card-body border-white"> Image:
+					{{ticket_form.image}}
+					</div>
+<!-- {{ticket_form.errors}} -->
+				</div>
+			</form>
+		</div>
 	</div>
-</form>
+</div>
+<div class="d-flex justify-content-center">
+	<div class="col-md-7">
+		<div  class="border border-dark"> Critique
+			<form action="" method="post">
+				{% csrf_token %}
 
-
-<!--<div class="d-flex justify-content-center">-->
-<!--	<div class="col-md-7">-->
-<!--		<div class="d-flex justify-content-center fs-2 p-4">Créer un ticket</div>-->
-<!--			<div  class="border border-dark"> Livre / Article-->
-<!--				<form action="" method="post" enctype="multipart/form-data">-->
-<!--					{% csrf_token %} &lt;!&ndash;protège les informations données&ndash;&gt;-->
-<!--						{{ticket_formset.as_p}}-->
-<!--&lt;!&ndash;					<div class="d-flex flex-column">&ndash;&gt;-->
-<!--&lt;!&ndash;						<div class="card card-body border-white"> Titre:&ndash;&gt;-->
-<!--&lt;!&ndash;							{{ticket_formset.title}}&ndash;&gt;-->
-<!--&lt;!&ndash;						</div>&ndash;&gt;-->
-<!--&lt;!&ndash;						<div class="card card-body border-white"> Description:&ndash;&gt;-->
-<!--&lt;!&ndash;							{{ticket_formset.description}}&ndash;&gt;-->
-<!--&lt;!&ndash;						</div>&ndash;&gt;-->
-<!--&lt;!&ndash;						<div class="card card-body border-white"> Image:&ndash;&gt;-->
-<!--&lt;!&ndash;							{{ticket_formset.image}}&ndash;&gt;-->
-<!--&lt;!&ndash;						</div>&ndash;&gt;-->
-<!--&lt;!&ndash;							{{ticket_formset.errors}}&ndash;&gt;-->
-<!--						<div class="d-flex justify-content-end">-->
-<!--							<button type="submit" class="rounded">Envoyer</button>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</form>-->
-<!--			</div>-->
-<!--	</div>-->
-<!--</div>-->
-<!--<div class="d-flex justify-content-center">-->
-<!--	<div class="col-md-7">-->
-<!--		<div class="d-flex justify-content-center fs-2">Créer une critique</div>-->
-<!--			<div  class="border border-dark"> Critique-->
-<!--				<form action="" method="post">-->
-<!--					{% csrf_token %}-->
-<!--					{{review_formset.as_p}}-->
-
-<!--&lt;!&ndash;					<div class="d-flex flex-column">&ndash;&gt;-->
-<!--&lt;!&ndash;						<div class="card card-body border-white"> Titre:&ndash;&gt;-->
-<!--&lt;!&ndash;						{{review_formset.headline}}&ndash;&gt;-->
-<!--&lt;!&ndash;						</div>&ndash;&gt;-->
-<!--&lt;!&ndash;						<div class="card card-body border-white">Note :&ndash;&gt;-->
-<!--&lt;!&ndash;							<div class="form-check form-check-inline border-white">&ndash;&gt;-->
-<!--&lt;!&ndash;								{{review_formset.rating}}&ndash;&gt;-->
-<!--&lt;!&ndash;							</div>&ndash;&gt;-->
-<!--&lt;!&ndash;						</div>&ndash;&gt;-->
-<!--&lt;!&ndash;						<div class="card card-body border-white"> Commentaire:&ndash;&gt;-->
-<!--&lt;!&ndash;							{{review_formset.body}}&ndash;&gt;-->
-<!--&lt;!&ndash;						</div>&ndash;&gt;-->
-<!--&lt;!&ndash;							{{review_formset.errors}}&ndash;&gt;-->
-<!--&lt;!&ndash;					</div>&ndash;&gt;-->
-<!--					<div class="d-flex justify-content-end">-->
-<!--						<button type="submit" class="rounded">Envoyer</button>-->
-<!--					</div>-->
-<!--				</form>-->
-<!--			</div>-->
-<!--		{% for message in messages%}-->
-<!--		<p id="message">{{message}}</p>-->
-<!--		{% endfor %}-->
-<!--	</div>-->
-<!--</div>-->
+				<div class="d-flex flex-column">
+					<div class="card card-body border-white"> Titre:
+					{{review_form.headline}}
+					</div>
+					<div class="card card-body border-white">Note :
+						<div class="form-check form-check-inline border-white">
+							{{review_form.rating}}
+						</div>
+					</div>
+					<div class="card card-body border-white"> Commentaire:
+						{{review_form.body}}
+					</div>
+		<!-- {{review_form.errors}} -->
+				</div>
+				<div class="d-flex justify-content-end">
+					<button type="submit" class="rounded">Envoyer</button>
+				</div>
+			</form>
+		</div>
+		{% for message in messages%}
+		<p id="message">{{message}}</p>
+		{% endfor %}
+	</div>
+</div> 
 {% endblock %}
