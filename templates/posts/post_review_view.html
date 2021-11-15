@@ -22,7 +22,7 @@
         {{post.body}}
     </div>
     {% if post.ticket is not None %}
-    <div class="ticket col-10 border border-dark p-2 m-2">
+    <div class="ticket col-10 border border-dark p-2 m-3">
         {% if post.user == request.user%}
             Ticket - Vous
         {% else %}
@@ -43,7 +43,7 @@
 {% endif %}
     <div class="d-flex justify-content-end align-items-end">
         <div class="p-2 mb-3 bd-highlight">
-            <a class="p-2 rounded border border-dark" href="">Modifier</a>
+            <a class="p-2 rounded border border-dark" href="{% url 'modify_review' post.id%}">Modifier</a>
         </div>
         <div class="p-2 mb-3 me-3 bd-highlight">
             <a class="p-2 rounded border border-dark" href="{% url 'delete_review' post.id%}">Supprimer</a>

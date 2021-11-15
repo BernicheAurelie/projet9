@@ -57,34 +57,26 @@ def delete_review(request, review_id: int):
         return redirect('flux')
     return render(request, 'posts/post_review_view.html')
 
-    # elif request.method == 'POST' and ticket_id is None:
-    #     form1 = CreateTicket(request.POST)
-    #     form2 = CreateReview(request.POST)
-    #     if form1.is_valid() and form2.is_valid():
-    #         ticket = form1.save(commit=False)
-    #         ticket.user = request.user
-    #         ticket.save()
-    #         review = form2.save(commit=False)
-    #         review.user = request.user
-    #         review.ticket = ticket
-    #         review.save()
-    #         ticket_title = form1.cleaned_data.get('title')
-    #         messages.success(request, 'Votre ticket: ' + ticket_title)
-    #         review_headline = form2.cleaned_data.get('headline')
-    #         messages.success(request, 'Votre critique: ' + review_headline)
-    #         return redirect('flux')
-
- # elif request.method == 'POST' and ticket_id is None:
- #        ticket = createTicket(request)
- #        form = CreateReview(request.POST)
- #        if form.is_valid():
- #            review = form.save(commit=False)
- #            review.user = request.user
- #            review.ticket = ticket
- #            review.save()
- #            ticket.reviewed = True
- #            ticket.save()
- #            review_headline = form.cleaned_data.get('headline')
- #            messages.success(request, 'Votre critique: ' + review_headline)
- #            return redirect('flux')
-
+@login_required(login_url='connexion')
+def modifyreview(request, review_id: int):
+    context={}
+    review = Review.objects.get(id__exact=review_id)
+    ticket = Ticket.objects.get(id__exact=review.ticket.id)
+    if request.method == 'GET':
+        form = CreateReview(instance=review)
+        context = {'form': form}
+    if request.method == 'POST':
+        form = CreateReview(request.POST)
+        if form.is_valid():
+            review.ticket = ticket
+            review.rating = form.cleaned_data['rating']
+            review.headline = form.cleaned_data['headline']
+            if form.cleaned_data['body'] is False:
+                review.body = None
+            elif form.cleaned_data['body'] is not None:
+                review.body = form.cleaned_data['body']
+            review.save()
+            review_headline = form.cleaned_data.get('headline')
+            messages.success(request, 'Votre ticket: ' + review_headline)
+            return redirect('flux')     
+    return render(request, 'review/review.html', context)

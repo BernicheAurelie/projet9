@@ -32,23 +32,23 @@ def deleteTicket(request, ticket_id: int):
 @login_required(login_url='connexion')
 def modifyTicket(request, ticket_id: int):
     context={}
+    ticket = Ticket.objects.get(id__exact=ticket_id)
     if request.method == 'GET':
-        ticket = Ticket.objects.get(id__exact=ticket_id)
-        print('--------> ticket: ', ticket)
         form = CreateTicket(instance=ticket)
         context = {'form': form}
-        if request.method == 'POST':
-            print('-------- on est dans la requete post ----------')
-            form = CreateTicket(request.POST, request.FILES, instance=ticket)
-            if form.is_valid():
-                ticket = form.save()
-                ticket_title = form.cleaned_data.get('title')
-                messages.success(request, 'Votre ticket: ' + ticket_title)
-                return redirect('flux')
-            else:
-                print('-------- form non valide ----------')
-        print('-------- on est avant le return ----------')
-        return render(request, 'ticket/ticket.html', context)
+    if request.method == 'POST':
+        form = CreateTicket(request.POST, request.FILES)
+        if form.is_valid():
+            ticket.title = form.cleaned_data['title']
+            ticket.description = form.cleaned_data['description']
+            if form.cleaned_data['image'] is False:
+                ticket.image = None
+            elif form.cleaned_data['image'] is not None:
+                ticket.image = form.cleaned_data['image']
+            ticket.save()
+            ticket_title = form.cleaned_data.get('title')
+            messages.success(request, 'Votre ticket: ' + ticket_title)
+            return redirect('flux')     
     return render(request, 'ticket/ticket.html', context)
 
     
