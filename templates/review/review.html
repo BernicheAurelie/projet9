@@ -10,38 +10,52 @@
 		flex: 1;
 	}
 </style>
-<div class="d-flex justify-content-center">
-	<div class="col-md-6">
-		<div class="d-flex justify-content-center fs-2">Créer une critique</div>
+<div class="d-flex justify-content-center fs-5">
+	<div class="col-md-7">
+		<div class="d-flex justify-content-center m-4 fs-2">
+			{{title}}
+		</div>
 		<form action="" method="post">
 			{% csrf_token %}
-			<div  class="border border-dark">Vous êtes en train de poster une critique en réponse à: 
-				{{form.ticket.title}}
+			<div  class="border border-dark">Vous êtes en train de poster une critique en réponse à:
+				<div class="ticket col-10 align-items-center border border-dark p-2 m-5">
+					<div class="title">
+						{{ticket.title}} 
+					</div>
+					<div class="description">
+						{{ ticket.description }}
+					</div>
+					{% if ticket.image %}
+					<div class="image">
+						<img src="{% get_media_prefix %}{{ ticket.image }}" alt="ticket_image" class="img-thumbnail w-25">
+					</div>
+					{% endif %}
+				</div>
 			</div>
-			<div  class="border border-dark"> Critique
-				
-					<div class="d-flex flex-column">
-						<div class="card card-body border-white"> Titre:
+			<div class="border border-dark mb-5"> Critique
+				<div class="d-flex flex-column">
+					<div class="card card-body border-white"> Titre:
 						{{form.headline}}
-						</div>
-						<div class="card card-body border-white">Note :
-							<div class="form-check form-check-inline border-white">
-								{{form.rating}}
-							</div>
-						</div>
-						<div class="card card-body border-white"> Commentaire:
-							{{form.body}}
-						</div>
-							{{form.errors}}
 					</div>
-					<div class="d-flex justify-content-end">
-						<button type="submit" class="rounded">Envoyer</button>
+					<div class="card card-body border-white"> Note :
 					</div>
-				</form>
-				{% for message in messages%}
-				<p id="message">{{message}}</p>
-				{% endfor %}
-			</div>
+					<ul id="id_rating">
+					{% for radio in form.rating %}
+						<li id="id_rating">
+							{{ radio }}
+						</li>
+					{% endfor %}
+					</ul>
+					<div class="card card-body border-white"> Commentaire:
+						{{form.body}}
+					</div>
+						{{form.errors}}
+				</div>
+				<div class="d-flex justify-content-end">
+					<button type="submit" class="rounded">Envoyer</button>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 

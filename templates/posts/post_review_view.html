@@ -5,19 +5,56 @@
 <div class="d-flex flex-column bd-highlight mb-3 border border-secondary">
     {%if post.user == request.user %}
     <div class="p-2 bd-highlight ">
-        vous avez publié une critique
+        Vous avez publié une critique
     </div>
     {% else %}
     <div class="p-2 bd-highlight ">
         {{post.user}} a publié une critique
     </div>
     {%endif%}
-    <div class="title fw-bold border-bottom border-light ps-2">
-        {{ post.headline }} - {{post.rating}} &#x2605;
+    <div class="text-end fs-6 m-2 fst-italic"> 
+        {{post.time_created|date:"H:i, d M Y" }}
     </div>
-    <!-- <div class="title fw-bold border-bottom border-light ps-2">
-        {{ post.headline }} - {{post.rating}} étoile(s)
-      </div> -->
+    <div class="title fw-bold border-bottom border-light ps-2">
+        {{ post.headline }} -
+        {% if post.rating == 0 %}
+        <span>&#9734;</span>
+        <span>&#9734;</span>
+        <span>&#9734;</span>
+        <span>&#9734;</span>
+        <span>&#9734;</span>
+    {% elif post.rating == 1 %}
+        <span>&#x2605;</span>
+        <span>&#9734;</span>
+        <span>&#9734;</span>
+        <span>&#9734;</span>
+        <span>&#9734;</span>
+    {% elif post.rating == 2 %}
+        <span>&#x2605;</span>
+        <span>&#x2605;</span>
+        <span>&#9734;</span>
+        <span>&#9734;</span>
+        <span>&#9734;</span>
+    {% elif post.rating == 3 %}
+        <span>&#x2605;</span>
+        <span>&#x2605;</span>
+        <span>&#x2605;</span>
+        <span>&#9734;</span>
+        <span>&#9734;</span>
+    {% elif post.rating == 4 %}
+        <span>&#x2605;</span>
+        <span>&#x2605;</span>
+        <span>&#x2605;</span>
+        <span>&#x2605;</span>
+        <span>&#9734;</span>
+    {% elif post.rating == 5 %}
+        <span>&#x2605;</span>
+        <span>&#x2605;</span>
+        <span>&#x2605;</span>
+        <span>&#x2605;</span>
+        <span>&#x2605;</span>
+    {%endif%}
+    </div>
     <div class="p-2 bd-highlight">
         {{post.body}}
     </div>

@@ -1,7 +1,7 @@
 
 <div class="d-flex bd-highlight mb-5 bg-dark text-white">
   {% if user.is_authenticated %}
-  <div class="me-auto p-2 bd-highlight"><a class="nav-link" href="{%url 'flux'%}">Bienvenue {{user.username}} (id n° {{user.id}})</a></div>
+  <div class="me-auto p-2 bd-highlight text-capitalize"><a class="nav-link" href="{%url 'flux'%}">Bienvenue {{user.username}}</a></div>
   <div class="me-auto p-3 bd-highlight">LITReview</div>
   <div class="p-2 bd-highlight"><a class="nav-link" href="{%url 'flux'%}">Flux</a></div>
   <div class="p-2 bd-highlight"><a class="nav-link" href="{%url 'posts'%}">Posts</a></div>

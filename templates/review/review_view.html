@@ -1,27 +1,63 @@
 
 {% load static %}
 {% block content %}
-<div class="d-flex flex-column bd-highlight mb-3 border border-secondary align-items-start">
+<div class="d-flex flex-column bd-highlight mb-3 border border-secondary fs-5">
     {%if post.user == request.user %}
-    <div class="p-2 bd-highlight ">
-        vous avez publié une critique
-    </div>
+        <div class="p-2 bd-highlight ">
+            Vous avez publié une critique
+        </div>
     {% else %}
-    <div class="p-2 bd-highlight ">
-        {{post.user}} a publié une critique
-    </div>
+        <div class="p-2 bd-highlight ">
+            {{post.user}} a publié une critique
+        </div>
     {%endif%}
+    <div class="text-end fs-6 m-2 fst-italic"> 
+        {{post.time_created|date:"H:i, d M Y" }}
+    </div>
     <div class="title fw-bold border-bottom border-light ps-2">
-        {{ post.headline }} - {{post.rating}} &#x2605;
-      </div>
-      
-    <!-- <div class="title fw-bold border-bottom border-light ps-2">
-        {{ post.headline }} - {{post.rating}} étoile(s)
-      </div> -->
+        {{ post.headline }} - 
+        {% if post.rating == 0 %}
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+        {% elif post.rating == 1 %}
+            <span>&#x2605;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+        {% elif post.rating == 2 %}
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+        {% elif post.rating == 3 %}
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+        {% elif post.rating == 4 %}
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#9734;</span>
+        {% elif post.rating == 5 %}
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+        {%endif%}
+    </div>  
     <div class="p-2 bd-highlight">
         {{post.body}}
     </div>
-        {% if post.ticket is not None %}
+    {% if post.ticket is not None %}
     <div class="ticket col-10 border border-dark p-2 m-2">
         {% if post.user == request.user%}
         Ticket - Vous
@@ -39,7 +75,7 @@
             <img src="{% get_media_prefix %}{{ post.ticket.image }}" alt="ticket_image" class="img-thumbnail w-25">
         </div>
         {% endif %}
-      </div>
-{% endif %}
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

@@ -3,9 +3,15 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-<h1 class="d-flex justify-content-center p-3 m-3">Vos posts</h1>
+<style>
+	a, a:hover {
+		text-decoration:none;
+  		color: black;
+	}
+</style>
+<div class="d-flex justify-content-center fs-2 p-3 m-3">Vos posts</div>
 
-<div class="col-8 offset-2 mt-3">
+<div class="col-8 fs-5 offset-2 mt-3">
 {% for post in posts %}
   {% if post.content_type == 'TICKET' %}
     {% include 'posts/post_ticket_view.html' %}

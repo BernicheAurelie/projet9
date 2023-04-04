@@ -13,7 +13,7 @@
 
 <div class="d-flex justify-content-center">
 	<div class="col-md-7">
-		<div class="d-flex justify-content-center fs-2 p-4">Créer une critique</div>
+		<div class="d-flex justify-content-center fs-2 p-4">Créer un ticket et une critique</div>
 		<div  class="border border-dark"> Livre / Article
 			<form action="" method="post" enctype="multipart/form-data">
 				{% csrf_token %}
@@ -28,40 +28,36 @@
 					<div class="card card-body border-white"> Image:
 					{{ticket_form.image}}
 					</div>
-<!-- {{ticket_form.errors}} -->
 				</div>
-			</form>
 		</div>
 	</div>
 </div>
 <div class="d-flex justify-content-center">
 	<div class="col-md-7">
-		<div  class="border border-dark"> Critique
-			<form action="" method="post">
-				{% csrf_token %}
+		<div  class="border border-dark mb-5"> Critique
 
 				<div class="d-flex flex-column">
 					<div class="card card-body border-white"> Titre:
 					{{review_form.headline}}
 					</div>
 					<div class="card card-body border-white">Note :
-						<div class="form-check form-check-inline border-white">
-							{{review_form.rating}}
-						</div>
 					</div>
+					<ul id="id_rating">
+						{% for radio in review_form.rating %}
+    					<li id="id_rating">
+        					{{ radio }}
+    					</li>
+						{% endfor %}
+						</ul>
 					<div class="card card-body border-white"> Commentaire:
 						{{review_form.body}}
 					</div>
-		<!-- {{review_form.errors}} -->
 				</div>
 				<div class="d-flex justify-content-end">
 					<button type="submit" class="rounded">Envoyer</button>
 				</div>
 			</form>
 		</div>
-		{% for message in messages%}
-		<p id="message">{{message}}</p>
-		{% endfor %}
 	</div>
 </div> 
 {% endblock %}

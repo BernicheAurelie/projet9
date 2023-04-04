@@ -1,8 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
 from .forms import CreerUtilisateur
 
 
@@ -18,7 +16,6 @@ def inscriptionPage(request):
     context = {'form': form}
     return render(request, 'users/inscription.html', context)
 
-
 def accesPage(request):
     context = {}
     if request.method == 'POST':
@@ -31,7 +28,6 @@ def accesPage(request):
         else:
             messages.info(request, "Utilisateur ou mot de passe incorrect")
     return render(request, 'users/acces.html', context)
-
 
 def logoutUser(request):
     logout(request)
