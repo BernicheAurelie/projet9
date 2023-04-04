@@ -24,26 +24,19 @@ L'application doit permettre également à l'utilisateur:
 
 ### Installation
 - Avec pipenv:   
-```pip install pipenv```   
-
+Installation: ```pip install pipenv```   
 Activation de l'environnement virtuel: ```pipenv shell```   
-
 Installation des dépendances: ```pipenv install```    
 
 - Avec pip, sans pipenv:   
-
 Création de l'environnement virtuel: ``` python -m venv env ```   
-
 Activation: ```env\Scripts\activate```   
-
 Installation des packages nécessaires: ```pip install -r requirements.txt```   
 
 
 ## Démarrage
 Lancement de l'application: ```python manage.py runserver```   
-
-Utilisateurs enregistrés pour visualiser les données:   
-
+Utilisateurs enregistrés pour visualiser les données:
 - *nom d'utilisateur:* alexandre *mot de passe:* 12alex34
 - *nom d'utilisateur:* guillaume *mot de passe:* 12guil34
 - *nom d'utilisateur:* raphael *mot de passe:* 12raph34
