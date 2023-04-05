@@ -26,9 +26,9 @@
 						{{ ticket.description }}
 					</div>
 					{% if ticket.image %}
-					<div class="image">
-						<img src="{% get_media_prefix %}{{ ticket.image }}" alt="ticket_image" class="img-thumbnail w-25">
-					</div>
+						<div class="image">
+							<img src="{% get_media_prefix %}{{ ticket.image }}" alt="ticket_image" class="img-thumbnail w-25">
+						</div>
 					{% endif %}
 				</div>
 			</div>
@@ -40,11 +40,11 @@
 					<div class="card card-body border-white"> Note :
 					</div>
 					<ul id="id_rating">
-					{% for radio in form.rating %}
-						<li id="id_rating">
-							{{ radio }}
-						</li>
-					{% endfor %}
+						{% for radio in form.rating %}
+							<li id="id_rating">
+								{{ radio }}
+							</li>
+						{% endfor %}
 					</ul>
 					<div class="card card-body border-white"> Commentaire:
 						{{form.body}}
@@ -58,6 +58,4 @@
 		</div>
 	</div>
 </div>
-
-
 {% endblock %}

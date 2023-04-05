@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('ticket', '0002_remove_ticket_reviewed'),
+        ("ticket", "0002_remove_ticket_reviewed"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='ticket',
-            name='reviewed',
+            model_name="ticket",
+            name="reviewed",
             field=models.BooleanField(default=False),
         ),
     ]

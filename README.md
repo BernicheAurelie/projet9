@@ -1,4 +1,4 @@
-# projet9: Développer une application web en utilisant Django
+# Projet9: Développer une application web en utilisant Django
 
 [![Generic badge](https://img.shields.io/badge/MADE_WITH-PYTHON-orange.svg)](https://www.python.org/)
 [![Generic badge](https://img.shields.io/badge/MADE_WITH-DJANGO-blue.svg)](https://www.djangoproject.com/)   
@@ -37,10 +37,10 @@ Installation des packages nécessaires: ```pip install -r requirements.txt```
 ## Démarrage
 Lancement de l'application: ```python manage.py runserver```   
 Utilisateurs enregistrés pour visualiser les données:
-- *nom d'utilisateur:* alexandre *mot de passe:* 12alex34
-- *nom d'utilisateur:* guillaume *mot de passe:* 12guil34
-- *nom d'utilisateur:* raphael *mot de passe:* 12raph34
-- *nom d'utilisateur:* victoria *mot de passe:* 12vict34
+- *nom d'utilisateur:* **alexandre** *mot de passe:* **12alex34**
+- *nom d'utilisateur:* **guillaume** *mot de passe:* **12guil34**
+- *nom d'utilisateur:* **raphael** *mot de passe:* **12raph34**
+- *nom d'utilisateur:* **victoria** *mot de passe:* **12vict34**
 
 ## Réalisé avec 
 - [Visual Studio Code](https://code.visualstudio.com/) - Editeur de textes

@@ -1,16 +1,14 @@
-
 {% load static %}
 {% block content %}
-
 <div class="d-flex flex-column bd-highlight mb-3 border border-secondary">
     {%if post.user == request.user %}
-    <div class="p-2 bd-highlight ">
-        Vous avez publié une critique
-    </div>
+        <div class="p-2 bd-highlight ">
+            Vous avez publié une critique
+        </div>
     {% else %}
-    <div class="p-2 bd-highlight ">
-        {{post.user}} a publié une critique
-    </div>
+        <div class="p-2 bd-highlight ">
+            {{post.user}} a publié une critique
+        </div>
     {%endif%}
     <div class="text-end fs-6 m-2 fst-italic"> 
         {{post.time_created|date:"H:i, d M Y" }}
@@ -18,66 +16,66 @@
     <div class="title fw-bold border-bottom border-light ps-2">
         {{ post.headline }} -
         {% if post.rating == 0 %}
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-    {% elif post.rating == 1 %}
-        <span>&#x2605;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-    {% elif post.rating == 2 %}
-        <span>&#x2605;</span>
-        <span>&#x2605;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-    {% elif post.rating == 3 %}
-        <span>&#x2605;</span>
-        <span>&#x2605;</span>
-        <span>&#x2605;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-    {% elif post.rating == 4 %}
-        <span>&#x2605;</span>
-        <span>&#x2605;</span>
-        <span>&#x2605;</span>
-        <span>&#x2605;</span>
-        <span>&#9734;</span>
-    {% elif post.rating == 5 %}
-        <span>&#x2605;</span>
-        <span>&#x2605;</span>
-        <span>&#x2605;</span>
-        <span>&#x2605;</span>
-        <span>&#x2605;</span>
-    {%endif%}
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+        {% elif post.rating == 1 %}
+            <span>&#x2605;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+        {% elif post.rating == 2 %}
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+        {% elif post.rating == 3 %}
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#9734;</span>
+            <span>&#9734;</span>
+        {% elif post.rating == 4 %}
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#9734;</span>
+        {% elif post.rating == 5 %}
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+            <span>&#x2605;</span>
+        {%endif%}
     </div>
     <div class="p-2 bd-highlight">
         {{post.body}}
     </div>
     {% if post.ticket is not None %}
-    <div class="ticket col-10 border border-dark p-2 m-3">
-        {% if post.user == request.user%}
-            Ticket - Vous
-        {% else %}
-            Ticket - {{ post.ticket.user.username }}
-        {%endif%}
-        <div class="title">
-            {{ post.ticket.title }}
+        <div class="ticket col-10 border border-dark p-2 m-3">
+            {% if post.user == request.user%}
+                Ticket - Vous
+            {% else %}
+                Ticket - {{ post.ticket.user.username }}
+            {%endif%}
+            <div class="title">
+                {{ post.ticket.title }}
+            </div>
+            <div class="description">
+                {{ post.ticket.description }}
+            </div>
+            {% if post.ticket.image %}
+            <div class="image">
+                <img src="{% get_media_prefix %}{{ post.ticket.image }}" alt="ticket_image" class="img-thumbnail w-25">
+            </div>
+            {% endif %} 
         </div>
-        <div class="description">
-            {{ post.ticket.description }}
-        </div>
-        {% if post.ticket.image %}
-        <div class="image">
-            <img src="{% get_media_prefix %}{{ post.ticket.image }}" alt="ticket_image" class="img-thumbnail w-25">
-        </div>
-        {% endif %} 
-    </div>
-{% endif %}
+    {% endif %}
     <div class="d-flex justify-content-end align-items-end">
         <div class="p-2 mb-3 bd-highlight">
             <a class="p-2 rounded border border-dark" href="{% url 'modify_review' post.id%}">Modifier</a>

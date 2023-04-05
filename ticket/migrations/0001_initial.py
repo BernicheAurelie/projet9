@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,15 +14,35 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Ticket',
+            name="Ticket",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=128, null=True)),
-                ('description', models.TextField(blank=True, max_length=2048, null=True)),
-                ('image', models.ImageField(blank=True, null=True, upload_to='images/')),
-                ('time_created', models.DateTimeField(auto_now_add=True)),
-                ('reviewed', models.BooleanField(default=False)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=128, null=True)),
+                (
+                    "description",
+                    models.TextField(blank=True, max_length=2048, null=True),
+                ),
+                (
+                    "image",
+                    models.ImageField(blank=True, null=True, upload_to="images/"),
+                ),
+                ("time_created", models.DateTimeField(auto_now_add=True)),
+                ("reviewed", models.BooleanField(default=False)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

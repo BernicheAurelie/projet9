@@ -4,45 +4,42 @@
 
 <div class="d-flex justify-content-center">
 	<div class="col-md-7">
-		<div class="d-flex justify-content-center fs-2 p-4">{{title}}</div>
-			<div class="fs-5 mb-5">
-				<form action="" method="post" enctype="multipart/form-data">
-					{% csrf_token %}
-					<div class="d-flex flex-column">
-						<div class="card card-body border-white"> Titre:
-							{{form.title}}
-						</div>
-						<div class="card card-body border-white"> Description:
-							{{form.description}}
-						</div>
-						{% if ticket.image %}
+		<div class="d-flex justify-content-center fs-2 p-4">
+			{{title}}
+		</div>
+		<div class="fs-5 mb-5">
+			<form action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="d-flex flex-column">
+					<div class="card card-body border-white"> Titre:
+						{{form.title}}
+					</div>
+					<div class="card card-body border-white"> Description:
+						{{form.description}}
+					</div>
+					{% if ticket.image %}
 						<div class="card card-body border-white">
 							<img src="{% get_media_prefix %}{{ ticket.image }}" alt="ticket_image" class="img-thumbnail w-25">
 						</div>
-						{% endif %}
-						<div class="card card-body border-white"> Image:
-							<div class="d-flex flex-row">
-								<button>
-									<input type="checkbox" name="image-clear" id="image-clear_id">{{form.image.input}}
-									<label for="image-clear_id">Effacer</label>
-								</button>
-							</div>
-							<div>
-								Modifier:</div><input type="file" name="image" accept="image/*" id="id_image">
-							</div>
+					{% endif %}
+					<div class="card card-body border-white"> Image:
+						<div class="d-flex flex-row">
+							<button>
+								<input type="checkbox" name="image-clear" id="image-clear_id">{{form.image.input}}
+								<label for="image-clear_id">Effacer</label>
+							</button>
 						</div>
-						{% comment %} <div class="card card-body border-white"> Image:
-							<div class="d-flex flex-row">
-							{{form.image}}
-							</div>
-						</div> {% endcomment %}
-							{{form.errors}}
-						<div class="d-flex justify-content-end">
-							<button type="submit" class="rounded">Envoyer</button>
+						<div>
+							Modifier:</div><input type="file" name="image" accept="image/*" id="id_image">
 						</div>
 					</div>
-				</form>
-			</div>
+						{{form.errors}}
+					<div class="d-flex justify-content-end">
+						<button type="submit" class="rounded">Envoyer</button>
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 {% endblock %}

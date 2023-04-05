@@ -7,51 +7,45 @@ from review.models import Review
 from ticket.models import Ticket
 from followers.models import UserFollows
 
-"""
+
+@login_required(login_url="connexion")
+def flux(request):
+    """
     get all user's tickets and review and those of his userfollows
     sort posts from time created
     return this to flux: home page after connexion
-"""
-@login_required(login_url='connexion')
-def flux(request):
+    """
     followed_users = UserFollows.objects.filter(user__exact=request.user)
     tickets = Ticket.objects.filter(
-        Q(user__id__in=followed_users.values_list('followed_user')) 
+        Q(user__id__in=followed_users.values_list("followed_user"))
         | Q(user__exact=request.user)
-        )
+    )
     reviews = Review.objects.filter(
-        Q(user__id__in=followed_users.values_list('followed_user')) 
+        Q(user__id__in=followed_users.values_list("followed_user"))
         | Q(user__exact=request.user)
-        )
-    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
-    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+    )
+    tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
+    reviews = reviews.annotate(content_type=Value("REVIEW", CharField()))
     posts = sorted(
-            chain(reviews, tickets),
-            key=lambda post: post.time_created,
-            reverse=True
-        )
-    context = {'posts': posts}
-    return render(request, 'flux/flux.html', context)
+        chain(reviews, tickets), key=lambda post: post.time_created, reverse=True
+    )
+    context = {"posts": posts}
+    return render(request, "flux/flux.html", context)
 
-"""
+
+@login_required(login_url="connexion")
+def posts(request):
+    """
     get all user's tickets and review,
     sorted from time created
-    return this to user own page: post.html 
-"""
-@login_required(login_url='connexion')
-def posts(request):
-    tickets = Ticket.objects.filter(
-        Q(user__exact=request.user)
-        )
-    reviews = Review.objects.filter(
-        Q(user__exact=request.user)
-        )
-    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
-    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+    return this to user own page: post.html
+    """
+    tickets = Ticket.objects.filter(Q(user__exact=request.user))
+    reviews = Review.objects.filter(Q(user__exact=request.user))
+    tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
+    reviews = reviews.annotate(content_type=Value("REVIEW", CharField()))
     posts = sorted(
-            chain(reviews, tickets),
-            key=lambda post: post.time_created,
-            reverse=True
-        )
-    context = {'posts': posts}
-    return render(request, 'posts/post.html', context)
+        chain(reviews, tickets), key=lambda post: post.time_created, reverse=True
+    )
+    context = {"posts": posts}
+    return render(request, "posts/post.html", context)
