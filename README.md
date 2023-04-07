@@ -25,8 +25,8 @@ L'application doit permettre également à l'utilisateur:
 ### Installation
 - Avec pipenv:   
 Installation: ```pip install pipenv```   
-Activation de l'environnement virtuel: ```pipenv shell```   
 Installation des dépendances: ```pipenv install```    
+Activation de l'environnement virtuel: ```pipenv shell```   
 
 - Avec pip, sans pipenv:   
 Création de l'environnement virtuel: ``` python -m venv env ```   
